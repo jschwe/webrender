@@ -987,6 +987,7 @@ impl Renderer {
     /// Processes the result queue.
     ///
     /// Should be called before `render()`, as texture cache updates are done here.
+    #[hitrace_macro::trace_fn]
     pub fn update(&mut self) {
         profile_scope!("update");
 
@@ -1221,6 +1222,7 @@ impl Renderer {
     /// A Frame is supplied by calling [`generate_frame()`][webrender_api::Transaction::generate_frame].
     /// buffer_age is the age of the current backbuffer. It is only relevant if partial present
     /// is active, otherwise 0 should be passed here.
+    #[hitrace_macro::trace_fn]
     pub fn render(
         &mut self,
         device_size: DeviceIntSize,
@@ -1421,6 +1423,7 @@ impl Renderer {
     // update texture cache render tasks but avoid doing a full frame render. If the
     // render is not going to be presented, then this must be set to None, as performing a
     // composite without a present will confuse partial present.
+    #[hitrace_macro::trace_fn]
     fn render_impl(
         &mut self,
         doc_id: DocumentId,
