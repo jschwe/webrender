@@ -1155,6 +1155,7 @@ impl RenderBackend {
         RenderBackendStatus::Continue
     }
 
+    #[hitrace_macro::trace_fn]
     fn process_scene_builder_result(
         &mut self,
         msg: SceneBuilderResult,

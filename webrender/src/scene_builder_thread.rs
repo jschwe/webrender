@@ -521,6 +521,7 @@ impl SceneBuilderThread {
     }
 
     /// Do the bulk of the work of the scene builder thread.
+    #[hitrace_macro::trace_fn]
     fn process_transaction(&mut self, mut txn: TransactionMsg) -> Box<BuiltTransaction> {
         profile_scope!("process_transaction");
 
@@ -654,6 +655,7 @@ impl SceneBuilderThread {
         );
 
         if self.simulate_slow_ms > 0 {
+            panic!("simulate_slow_ms was set. We don't want that for benchmarks...");
             thread::sleep(Duration::from_millis(self.simulate_slow_ms as u64));
         }
 
